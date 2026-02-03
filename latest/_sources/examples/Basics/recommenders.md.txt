@@ -247,15 +247,15 @@ print(recommendation)
     
     
     Recommended experiments: 
-             Solvent                Base                        Ligand  \
-    315         DMAc  Potassium pivalate  Di-tert-butylphenylphosphine   
-    247         DMAc     Cesium pivalate                 (t-Bu)PhCPhos   
-    98   Butyl Ester  Potassium pivalate                     BrettPhos   
+               Solvent                Base                        Ligand  \
+    106    Butyl Ester  Potassium pivalate  Di-tert-butylphenylphosphine   
+    183  Butyornitrile   Potassium acetate  Di-tert-butylphenylphosphine   
+    97     Butyl Ester  Potassium pivalate                     BrettPhos   
     
          Temperature  Concentration  
-    315         90.0          0.057  
-    247        105.0          0.100  
-    98         120.0          0.153  
+    106        120.0          0.100  
+    183        105.0          0.057  
+    97         120.0          0.100  
 
 
 
@@ -268,15 +268,15 @@ print(recommendation)
     
     
     Recommended experiments with fake measured values: 
-             Solvent                Base                        Ligand  \
-    315         DMAc  Potassium pivalate  Di-tert-butylphenylphosphine   
-    247         DMAc     Cesium pivalate                 (t-Bu)PhCPhos   
-    98   Butyl Ester  Potassium pivalate                     BrettPhos   
+               Solvent                Base                        Ligand  \
+    106    Butyl Ester  Potassium pivalate  Di-tert-butylphenylphosphine   
+    183  Butyornitrile   Potassium acetate  Di-tert-butylphenylphosphine   
+    97     Butyl Ester  Potassium pivalate                     BrettPhos   
     
          Temperature  Concentration      yield  
-    315         90.0          0.057  51.030800  
-    247        105.0          0.100 -25.683629  
-    98         120.0          0.153  60.759354  
+    106        120.0          0.100 -56.325945  
+    183        105.0          0.057  83.326436  
+    97         120.0          0.100 -24.643324  
 
 
 
