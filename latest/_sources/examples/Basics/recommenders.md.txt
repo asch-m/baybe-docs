@@ -107,11 +107,10 @@ available_acq_functions = [
 ]
 ```
 
-Note that the availability of the acquisition functions might depend on the
-`batch_size`:
-  - If `batch_size` is set to 1, all available acquisition functions can be chosen
-  - If a larger value is chosen, only those that allow batching.
-      That is, 'q'-variants of the acquisition functions must be chosen.
+Note that the availability of acquisition functions depends on `batch_size`:
+  - If `batch_size` is 1, any available acquisition functions may be used
+  - If `batch_size` > 1, only those that allow batching;
+      i.e., 'q'-variants of the acquisition functions must be chosen.
 
 The default acquisition function is q-Log Expected Improvement.
 
@@ -124,8 +123,8 @@ ACQ_FUNCTION = "qLogEI"
 
 To create the recommender object, each parameter described above can be specified as
 follows.
-Note that they all have default values.
-Therefore one does not need to specify all of them to create a recommender object.
+All parameters have default values, so you do not need to specify them all to create a
+recommender object.
 
 
 ```python
@@ -135,10 +134,6 @@ recommender = TwoPhaseMetaRecommender(
         surrogate_model=SURROGATE_MODEL, acquisition_function=ACQ_FUNCTION
     ),
 )
-```
-
-
-```python
 print(recommender)
 ```
 
@@ -214,10 +209,6 @@ We create the searchspace and the objective.
 
 ```python
 searchspace = SearchSpace.from_product(parameters=parameters)
-```
-
-
-```python
 objective = SingleTargetObjective(target=NumericalTarget(name="yield"))
 ```
 
@@ -247,15 +238,15 @@ print(recommendation)
     
     
     Recommended experiments: 
-               Solvent                Base                        Ligand  \
-    106    Butyl Ester  Potassium pivalate  Di-tert-butylphenylphosphine   
-    183  Butyornitrile   Potassium acetate  Di-tert-butylphenylphosphine   
-    97     Butyl Ester  Potassium pivalate                     BrettPhos   
+             Solvent             Base                        Ligand  Temperature  \
+    327     p-Xylene   Cesium acetate                 (t-Bu)PhCPhos        105.0   
+    369     p-Xylene  Cesium pivalate  Di-tert-butylphenylphosphine         90.0   
+    31   Butyl Ester  Cesium pivalate                 (t-Bu)PhCPhos        105.0   
     
-         Temperature  Concentration  
-    106        120.0          0.100  
-    183        105.0          0.057  
-    97         120.0          0.100  
+         Concentration  
+    327          0.057  
+    369          0.057  
+    31           0.100  
 
 
 
@@ -268,15 +259,15 @@ print(recommendation)
     
     
     Recommended experiments with fake measured values: 
-               Solvent                Base                        Ligand  \
-    106    Butyl Ester  Potassium pivalate  Di-tert-butylphenylphosphine   
-    183  Butyornitrile   Potassium acetate  Di-tert-butylphenylphosphine   
-    97     Butyl Ester  Potassium pivalate                     BrettPhos   
+             Solvent             Base                        Ligand  Temperature  \
+    327     p-Xylene   Cesium acetate                 (t-Bu)PhCPhos        105.0   
+    369     p-Xylene  Cesium pivalate  Di-tert-butylphenylphosphine         90.0   
+    31   Butyl Ester  Cesium pivalate                 (t-Bu)PhCPhos        105.0   
     
-         Temperature  Concentration      yield  
-    106        120.0          0.100 -56.325945  
-    183        105.0          0.057  83.326436  
-    97         120.0          0.100 -24.643324  
+         Concentration      yield  
+    327          0.057 -30.877365  
+    369          0.057  94.238186  
+    31           0.100  -6.392943  
 
 
 

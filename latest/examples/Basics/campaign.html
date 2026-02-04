@@ -1114,17 +1114,13 @@ space. For this, we require data for solvents, ligands and bases.</p>
     <span class="s2">&quot;Butyl Ester&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;CCCCOC(C)=O&quot;</span><span class="p">,</span>
     <span class="s2">&quot;p-Xylene&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;CC1=CC=C(C)C=C1&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dict_base</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">dict_base</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;Potassium acetate&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;O=C([O-])C.[K+]&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Potassium pivalate&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;O=C([O-])C(C)(C)C.[K+]&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Cesium acetate&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;O=C([O-])C.[Cs+]&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Cesium pivalate&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;O=C([O-])C(C)(C)C.[Cs+]&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dict_ligand</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">dict_ligand</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;BrettPhos&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;CC(C)C1=CC(C(C)C)=C(C(C(C)C)=C1)C2=C(P(C3CCCCC3)C4CCCCC4)C(OC)=&quot;</span>
     <span class="s2">&quot;CC=C2OC&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Di-tert-butylphenylphosphine&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;CC(C)(C)P(C1=CC=CC=C1)C(C)(C)C&quot;</span><span class="p">,</span>
@@ -1139,20 +1135,14 @@ and create the search space.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solvent</span> <span class="o">=</span> <span class="n">SubstanceParameter</span><span class="p">(</span><span class="s2">&quot;Solvent&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dict_solvent</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;MORDRED&quot;</span><span class="p">)</span>
 <span class="n">base</span> <span class="o">=</span> <span class="n">SubstanceParameter</span><span class="p">(</span><span class="s2">&quot;Base&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dict_base</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;MORDRED&quot;</span><span class="p">)</span>
 <span class="n">ligand</span> <span class="o">=</span> <span class="n">SubstanceParameter</span><span class="p">(</span><span class="s2">&quot;Ligand&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dict_ligand</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;MORDRED&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="n">NumericalDiscreteParameter</span><span class="p">(</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="n">NumericalDiscreteParameter</span><span class="p">(</span>
     <span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span> <span class="n">tolerance</span><span class="o">=</span><span class="mi">2</span>
 <span class="p">)</span>
 <span class="n">concentration</span> <span class="o">=</span> <span class="n">NumericalDiscreteParameter</span><span class="p">(</span>
     <span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mf">0.057</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.153</span><span class="p">],</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.005</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">solvent</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">ligand</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">concentration</span><span class="p">]</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">searchspace</span> <span class="o">=</span> <span class="n">SearchSpace</span><span class="o">.</span><span class="n">from_product</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">solvent</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">ligand</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">concentration</span><span class="p">]</span>
+<span class="n">searchspace</span> <span class="o">=</span> <span class="n">SearchSpace</span><span class="o">.</span><span class="n">from_product</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In this example, we maximize the yield of a reaction and define a corresponding
@@ -1160,7 +1150,7 @@ objective.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">objective</span> <span class="o">=</span> <span class="n">SingleTargetObjective</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">NumericalTarget</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;yield&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>We now finally create the campaign using the objects configure previously.</p>
+<p>Finally, create the campaign using the objects configure previously.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">campaign</span> <span class="o">=</span> <span class="n">Campaign</span><span class="p">(</span>
     <span class="n">searchspace</span><span class="o">=</span><span class="n">searchspace</span><span class="p">,</span>
     <span class="n">objective</span><span class="o">=</span><span class="n">objective</span><span class="p">,</span>
@@ -1170,7 +1160,7 @@ objective.</p>
 </section>
 <section id="getting-a-recommendation-and-adding-measurements">
 <h2>Getting a recommendation and adding measurements<a class="headerlink" href="#getting-a-recommendation-and-adding-measurements" title="Link to this heading">¶</a></h2>
-<p>We use the <code class="docutils literal notranslate"><span class="pre">recommend()</span></code> function of the campaign for getting measurements.</p>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">recommend()</span></code> function of the campaign for getting recommended measurements.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recommendation</span> <span class="o">=</span> <span class="n">campaign</span><span class="o">.</span><span class="n">recommend</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1179,13 +1169,9 @@ objective.</p>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Recommended measurements with batch_size = 2: 
-      Solvent                Base                        Ligand  Temperature  \
-332  p-Xylene      Cesium acetate                 (t-Bu)PhCPhos        120.0   
-317      DMAc  Potassium pivalate  Di-tert-butylphenylphosphine         90.0   
-
-     Concentration  
-332          0.153  
-317          0.153  
+           Solvent                Base     Ligand  Temperature  Concentration
+64     Butyl Ester   Potassium acetate  BrettPhos         90.0          0.100
+198  Butyornitrile  Potassium pivalate  BrettPhos         90.0          0.057
 </pre></div>
 </div>
 <p>Adding target values is done by creating a new column in the <code class="docutils literal notranslate"><span class="pre">recommendation</span></code>
@@ -1198,13 +1184,13 @@ We then update the campaign by adding the measurements.</p>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Recommended experiments with fake measured values: 
-      Solvent                Base                        Ligand  Temperature  \
-332  p-Xylene      Cesium acetate                 (t-Bu)PhCPhos        120.0   
-317      DMAc  Potassium pivalate  Di-tert-butylphenylphosphine         90.0   
+           Solvent                Base     Ligand  Temperature  Concentration  \
+64     Butyl Ester   Potassium acetate  BrettPhos         90.0          0.100   
+198  Butyornitrile  Potassium pivalate  BrettPhos         90.0          0.057   
 
-     Concentration      yield  
-332          0.153  28.269670  
-317          0.153 -32.000856  
+         yield  
+64  -27.861730  
+198 -28.642529  
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">campaign</span><span class="o">.</span><span class="n">add_measurements</span><span class="p">(</span><span class="n">recommendation</span><span class="p">)</span>

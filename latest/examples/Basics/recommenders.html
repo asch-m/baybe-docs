@@ -1181,12 +1181,11 @@ The following acquisition functions are generally available.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>Note that the availability of the acquisition functions might depend on the
-<code class="docutils literal notranslate"><span class="pre">batch_size</span></code>:</p>
+<p>Note that the availability of acquisition functions depends on <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>:</p>
 <ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> is set to 1, all available acquisition functions can be chosen</p></li>
-<li><p>If a larger value is chosen, only those that allow batching.
-That is, ‘q’-variants of the acquisition functions must be chosen.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> is 1, any available acquisition functions may be used</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> &gt; 1, only those that allow batching;
+i.e., ‘q’-variants of the acquisition functions must be chosen.</p></li>
 </ul>
 <p>The default acquisition function is q-Log Expected Improvement.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ACQ_FUNCTION</span> <span class="o">=</span> <span class="s2">&quot;qLogEI&quot;</span>
@@ -1197,17 +1196,15 @@ That is, ‘q’-variants of the acquisition functions must be chosen.</p></li>
 <h2>Creating the recommender object<a class="headerlink" href="#creating-the-recommender-object" title="Link to this heading">¶</a></h2>
 <p>To create the recommender object, each parameter described above can be specified as
 follows.
-Note that they all have default values.
-Therefore one does not need to specify all of them to create a recommender object.</p>
+All parameters have default values, so you do not need to specify them all to create a
+recommender object.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recommender</span> <span class="o">=</span> <span class="n">TwoPhaseMetaRecommender</span><span class="p">(</span>
     <span class="n">initial_recommender</span><span class="o">=</span><span class="n">INITIAL_RECOMMENDER</span><span class="p">,</span>
     <span class="n">recommender</span><span class="o">=</span><span class="n">BotorchRecommender</span><span class="p">(</span>
         <span class="n">surrogate_model</span><span class="o">=</span><span class="n">SURROGATE_MODEL</span><span class="p">,</span> <span class="n">acquisition_function</span><span class="o">=</span><span class="n">ACQ_FUNCTION</span>
     <span class="p">),</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">recommender</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recommender</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>TwoPhaseMetaRecommender
@@ -1272,9 +1269,7 @@ Has switched: False</p>
 </div>
 <p>We create the searchspace and the objective.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">searchspace</span> <span class="o">=</span> <span class="n">SearchSpace</span><span class="o">.</span><span class="n">from_product</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">objective</span> <span class="o">=</span> <span class="n">SingleTargetObjective</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">NumericalTarget</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;yield&quot;</span><span class="p">))</span>
+<span class="n">objective</span> <span class="o">=</span> <span class="n">SingleTargetObjective</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">NumericalTarget</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;yield&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>
@@ -1296,15 +1291,15 @@ as follows.</p>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Recommended experiments: 
-           Solvent                Base                        Ligand  \
-106    Butyl Ester  Potassium pivalate  Di-tert-butylphenylphosphine   
-183  Butyornitrile   Potassium acetate  Di-tert-butylphenylphosphine   
-97     Butyl Ester  Potassium pivalate                     BrettPhos   
+         Solvent             Base                        Ligand  Temperature  \
+327     p-Xylene   Cesium acetate                 (t-Bu)PhCPhos        105.0   
+369     p-Xylene  Cesium pivalate  Di-tert-butylphenylphosphine         90.0   
+31   Butyl Ester  Cesium pivalate                 (t-Bu)PhCPhos        105.0   
 
-     Temperature  Concentration  
-106        120.0          0.100  
-183        105.0          0.057  
-97         120.0          0.100  
+     Concentration  
+327          0.057  
+369          0.057  
+31           0.100  
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">add_fake_measurements</span><span class="p">(</span><span class="n">recommendation</span><span class="p">,</span> <span class="n">campaign</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
@@ -1313,15 +1308,15 @@ as follows.</p>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Recommended experiments with fake measured values: 
-           Solvent                Base                        Ligand  \
-106    Butyl Ester  Potassium pivalate  Di-tert-butylphenylphosphine   
-183  Butyornitrile   Potassium acetate  Di-tert-butylphenylphosphine   
-97     Butyl Ester  Potassium pivalate                     BrettPhos   
+         Solvent             Base                        Ligand  Temperature  \
+327     p-Xylene   Cesium acetate                 (t-Bu)PhCPhos        105.0   
+369     p-Xylene  Cesium pivalate  Di-tert-butylphenylphosphine         90.0   
+31   Butyl Ester  Cesium pivalate                 (t-Bu)PhCPhos        105.0   
 
-     Temperature  Concentration      yield  
-106        120.0          0.100 -56.325945  
-183        105.0          0.057  83.326436  
-97         120.0          0.100 -24.643324  
+     Concentration      yield  
+327          0.057 -30.877365  
+369          0.057  94.238186  
+31           0.100  -6.392943  
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">campaign</span><span class="o">.</span><span class="n">add_measurements</span><span class="p">(</span><span class="n">recommendation</span><span class="p">)</span>

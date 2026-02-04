@@ -1090,13 +1090,11 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="creating-continuous-search-spaces">
 <h1>Creating Continuous Search Spaces<a class="headerlink" href="#creating-continuous-search-spaces" title="Link to this heading">¶</a></h1>
-<p>This example illustrates several ways to create continuous spaces space.</p>
+<p>This example illustrates several ways to create continuous search spaces.</p>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">baybe.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumericalContinuousParameter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">baybe.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumericalContinuousParameter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">baybe.searchspace</span><span class="w"> </span><span class="kn">import</span> <span class="n">SearchSpace</span><span class="p">,</span> <span class="n">SubspaceContinuous</span>
 </pre></div>
 </div>
@@ -1106,9 +1104,7 @@
 <p>We begin by defining the continuous parameters that span our space:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DIMENSION</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">BOUNDS</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">NumericalContinuousParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;x_</span><span class="si">{</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">BOUNDS</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">DIMENSION</span><span class="p">)</span>
 <span class="p">]</span>
@@ -1123,29 +1119,27 @@ Let us draw some samples from it and verify that they are within the bounds:</p>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        x_1       x_2       x_3       x_4
-0 -0.911070  0.555454  0.532406  0.074813
-1  0.377752  0.690561 -0.375779 -0.853896
-2 -0.061526 -0.089349 -0.521642 -0.346704
-3  0.299141  0.371879  0.427184  0.925636
-4 -0.976461  0.439771  0.133264  0.065446
-5 -0.770826  0.723648 -0.786275 -0.231950
-6 -0.640749 -0.959870  0.309649 -0.932353
-7 -0.344331  0.166715 -0.541849 -0.883201
-8  0.136174 -0.975026  0.985240 -0.218482
-9 -0.996495  0.717780  0.703168 -0.336779
+0  0.646881 -0.072304  0.015136  0.650720
+1 -0.553753 -0.038033  0.791741  0.964562
+2  0.673585  0.080131  0.100510 -0.484560
+3  0.931654 -0.682423 -0.927133 -0.109866
+4 -0.949656  0.666206 -0.596824  0.747078
+5  0.101286 -0.983320 -0.118174  0.136834
+6 -0.142045  0.100955  0.195373  0.972701
+7  0.564069  0.692591  0.475707  0.728520
+8  0.473949  0.254323  0.269854 -0.410366
+9  0.813417 -0.371364  0.661125 -0.498145
 </pre></div>
 </div>
 <p>There are several ways we can turn the above objects into a search space.
 This provides a lot of flexibility depending on the context:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using conversion:</span>
 <span class="n">searchspace1</span> <span class="o">=</span> <span class="n">SubspaceContinuous</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span><span class="o">.</span><span class="n">to_searchspace</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Explicit attribute assignment via the regular search space constructor:</span>
+<span class="c1">#</span>
+<span class="c1"># Explicit attribute assignment via the regular search space constructor:</span>
 <span class="n">searchspace2</span> <span class="o">=</span> <span class="n">SearchSpace</span><span class="p">(</span><span class="n">continuous</span><span class="o">=</span><span class="n">SubspaceContinuous</span><span class="p">(</span><span class="n">parameters</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using an alternative search space constructor:</span>
+<span class="c1">#</span>
+<span class="c1"># Using an alternative search space constructor:</span>
 <span class="n">searchspace3</span> <span class="o">=</span> <span class="n">SearchSpace</span><span class="o">.</span><span class="n">from_product</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
 </pre></div>
 </div>
