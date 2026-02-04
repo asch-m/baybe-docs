@@ -24,14 +24,12 @@ dict_solvent = {
     "Butyl Ester": r"CCCCOC(C)=O",
     "p-Xylene": r"CC1=CC=C(C)C=C1",
 }
-
 dict_base = {
     "Potassium acetate": r"O=C([O-])C.[K+]",
     "Potassium pivalate": r"O=C([O-])C(C)(C)C.[K+]",
     "Cesium acetate": r"O=C([O-])C.[Cs+]",
     "Cesium pivalate": r"O=C([O-])C(C)(C)C.[Cs+]",
 }
-
 dict_ligand = {
     "BrettPhos": r"CC(C)C1=CC(C(C)C)=C(C(C(C)C)=C1)C2=C(P(C3CCCCC3)C4CCCCC4)C(OC)="
     "CC=C2OC",
@@ -47,16 +45,13 @@ dict_ligand = {
 solvent = SubstanceParameter("Solvent", data=dict_solvent, encoding="MORDRED")
 base = SubstanceParameter("Base", data=dict_base, encoding="MORDRED")
 ligand = SubstanceParameter("Ligand", data=dict_ligand, encoding="MORDRED")
-
 temperature = NumericalDiscreteParameter(
     "Temperature", values=[90, 105, 120], tolerance=2
 )
 concentration = NumericalDiscreteParameter(
     "Concentration", values=[0.057, 0.1, 0.153], tolerance=0.005
 )
-
 parameters = [solvent, base, ligand, temperature, concentration]
-
 searchspace = SearchSpace.from_product(parameters=parameters)
 
 # In this example, we maximize the yield of a reaction and define a corresponding
@@ -64,7 +59,7 @@ searchspace = SearchSpace.from_product(parameters=parameters)
 
 objective = SingleTargetObjective(target=NumericalTarget(name="yield"))
 
-# We now finally create the campaign using the objects configure previously.
+# Finally, create the campaign using the objects configure previously.
 
 campaign = Campaign(
     searchspace=searchspace,
@@ -73,7 +68,7 @@ campaign = Campaign(
 
 ### Getting a recommendation and adding measurements
 
-# We use the `recommend()` function of the campaign for getting measurements.
+# We use the `recommend()` function of the campaign for getting recommended measurements.
 
 recommendation = campaign.recommend(batch_size=2)
 

@@ -79,10 +79,10 @@ available_acq_functions = [
     "UCB",  # upper confidence bound with beta of 1.0
 ]
 
-# Note that the availability of the acquisition functions might depend on the `batch_size`:
-#   - If `batch_size` is set to 1, all available acquisition functions can be chosen
-#   - If a larger value is chosen, only those that allow batching.
-#       That is, 'q'-variants of the acquisition functions must be chosen.
+# Note that the availability of acquisition functions depends on `batch_size`:
+#   - If `batch_size` is 1, any available acquisition functions may be used
+#   - If `batch_size` > 1, only those that allow batching;
+#       i.e., 'q'-variants of the acquisition functions must be chosen.
 
 # The default acquisition function is q-Log Expected Improvement.
 
@@ -91,8 +91,7 @@ ACQ_FUNCTION = "qLogEI"
 ### Creating the recommender object
 
 # To create the recommender object, each parameter described above can be specified as follows.
-# Note that they all have default values.
-# Therefore one does not need to specify all of them to create a recommender object.
+# All parameters have default values, so you do not need to specify them all to create a recommender object.
 
 recommender = TwoPhaseMetaRecommender(
     initial_recommender=INITIAL_RECOMMENDER,
@@ -100,7 +99,6 @@ recommender = TwoPhaseMetaRecommender(
         surrogate_model=SURROGATE_MODEL, acquisition_function=ACQ_FUNCTION
     ),
 )
-
 print(recommender)
 
 ### Example Searchspace and objective parameters
@@ -143,7 +141,6 @@ parameters = [solvent, base, ligand, temperature, concentration]
 # We create the searchspace and the objective.
 
 searchspace = SearchSpace.from_product(parameters=parameters)
-
 objective = SingleTargetObjective(target=NumericalTarget(name="yield"))
 
 ### Creating the campaign
